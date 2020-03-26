@@ -1,0 +1,564 @@
+<html xmlns:th="http://www.w3.org/1999/xhtml" lang="en">
+<head><title>Quiz Sheet</title></head>
+<link href="../static/css/bootstrap.css" rel="stylesheet" th:href="@{/css/bootstrap.css}"/>
+
+<script th:inline="javascript">
+    function calculateTotal() {
+
+        var t1r1 = parseInt(document.getElementById('t1r1').value, 10);
+        var t1r2 = parseInt(document.getElementById('t1r2').value, 10);
+        var t1r3 = parseInt(document.getElementById('t1r3').value, 10);
+        var t1r4 = parseInt(document.getElementById('t1r4').value, 10);
+        var t1r5 = parseInt(document.getElementById('t1r5').value, 10);
+        if (isNaN(t1r1))
+            t1r1 = 0;
+        if (isNaN(t1r2))
+            t1r2 = 0;
+        if (isNaN(t1r3))
+            t1r3 = 0;
+        if (isNaN(t1r4))
+            t1r4 = 0;
+        if (isNaN(t1r5))
+            t1r5 = 0;
+
+        var t1total = t1r1 + t1r2 + t1r3 + t1r4 + t1r5;
+        document.getElementById('t1tot').value = t1total;
+        var team1 = {
+            id: 't1pos',
+            total: t1total
+        }
+
+        var t2r1 = parseInt(document.getElementById('t2r1').value, 10);
+        var t2r2 = parseInt(document.getElementById('t2r2').value, 10);
+        var t2r3 = parseInt(document.getElementById('t2r3').value, 10);
+        var t2r4 = parseInt(document.getElementById('t2r4').value, 10);
+        var t2r5 = parseInt(document.getElementById('t2r5').value, 10);
+        if (isNaN(t2r1))
+            t2r1 = 0;
+        if (isNaN(t2r2))
+            t2r2 = 0;
+        if (isNaN(t2r3))
+            t2r3 = 0;
+        if (isNaN(t2r4))
+            t2r4 = 0;
+        if (isNaN(t2r5))
+            t2r5 = 0;
+        var t2total = t2r1 + t2r2 + t2r3 + t2r4 + t2r5;
+        document.getElementById('t2tot').value = t2total;
+        var team2 = {
+            id: 't2pos',
+            total: t2total
+        }
+
+        var t3r1 = parseInt(document.getElementById('t3r1').value, 10);
+        var t3r2 = parseInt(document.getElementById('t3r2').value, 10);
+        var t3r3 = parseInt(document.getElementById('t3r3').value, 10);
+        var t3r4 = parseInt(document.getElementById('t3r4').value, 10);
+        var t3r5 = parseInt(document.getElementById('t3r5').value, 10);
+        if (isNaN(t3r1))
+            t3r1 = 0;
+        if (isNaN(t3r2))
+            t3r2 = 0;
+        if (isNaN(t3r3))
+            t3r3 = 0;
+        if (isNaN(t3r4))
+            t3r4 = 0;
+        if (isNaN(t3r5))
+            t3r5 = 0;
+        var t3total = t3r1 + t3r2 + t3r3 + t3r4 + t3r5
+        document.getElementById('t3tot').value = t3total;
+        var team3 = {
+            id: 't3pos',
+            total: t3total
+        }
+
+        var t4r1 = parseInt(document.getElementById('t4r1').value, 10);
+        var t4r2 = parseInt(document.getElementById('t4r2').value, 10);
+        var t4r3 = parseInt(document.getElementById('t4r3').value, 10);
+        var t4r4 = parseInt(document.getElementById('t4r4').value, 10);
+        var t4r5 = parseInt(document.getElementById('t4r5').value, 10);
+        if (isNaN(t4r1))
+            t4r1 = 0;
+        if (isNaN(t4r2))
+            t4r2 = 0;
+        if (isNaN(t4r3))
+            t4r3 = 0;
+        if (isNaN(t4r4))
+            t4r4 = 0;
+        if (isNaN(t4r5))
+            t4r5 = 0;
+        var t4total = t4r1 + t4r2 + t4r3 + t4r4 + t4r5;
+        document.getElementById('t4tot').value = t4total;
+        var team4 = {
+            id: 't4pos',
+            total: t4total
+        }
+
+        var t5r1 = parseInt(document.getElementById('t5r1').value, 10);
+        var t5r2 = parseInt(document.getElementById('t5r2').value, 10);
+        var t5r3 = parseInt(document.getElementById('t5r3').value, 10);
+        var t5r4 = parseInt(document.getElementById('t5r4').value, 10);
+        var t5r5 = parseInt(document.getElementById('t5r5').value, 10);
+        if (isNaN(t5r1))
+            t5r1 = 0;
+        if (isNaN(t5r2))
+            t5r2 = 0;
+        if (isNaN(t5r3))
+            t5r3 = 0;
+        if (isNaN(t5r4))
+            t5r4 = 0;
+        if (isNaN(t5r5))
+            t5r5 = 0;
+        var t5total = t5r1 + t5r2 + t5r3 + t5r4 + t5r5
+        document.getElementById('t5tot').value = t5total;
+        var team5 = {
+            id: 't5pos',
+            total: t5total
+        }
+
+        var teams = [team1, team2, team3, team4, team5];
+        var sorted = [];
+
+        for (var i = 0; i < teams.length; i++) {
+            sorted.push(teams[i]);
+        }
+
+        sorted.sort(function (a, b) {
+            return b.total - a.total;
+        });
+
+        for (var j = 0; j < sorted.length; j++) {
+            sorted[j].rank = j + 1;
+        }
+
+        function sortRanking() {
+            for (var k = 0; k < sorted.length; k++) {
+                for (var h = 1; h < sorted.length + 1; h++) {
+                    if (sorted[k + h] !== undefined) {
+                        if (sorted[k + h].tie !== true) {
+                            if (sorted[k].total === sorted[h + k].total) {
+                                sorted[k].rank = k + 1;
+                                sorted[h + k].rank = k + 1;
+                                sorted[k].tie = true;
+                                sorted[h + k].tie = true;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        sortRanking();
+
+        document.getElementById('t1pos').value = team1.rank;
+        document.getElementById('t2pos').value = team2.rank;
+        document.getElementById('t3pos').value = team3.rank;
+        document.getElementById('t4pos').value = team4.rank;
+        document.getElementById('t5pos').value = team5.rank;
+
+    }
+
+    function addJoker(value) {
+        var t1Joker = parseInt(document.getElementById('t1joker').value, 10);
+        var t2Joker = parseInt(document.getElementById('t2joker').value, 10);
+        var t3Joker = parseInt(document.getElementById('t3joker').value, 10);
+        var t4Joker = parseInt(document.getElementById('t4joker').value, 10);
+        var t5Joker = parseInt(document.getElementById('t5joker').value, 10);
+
+        if (value == 't1joker') {
+            var t1r1 = parseInt(document.getElementById('t1r1').value, 10);
+            var t1r2 = parseInt(document.getElementById('t1r2').value, 10);
+            var t1r3 = parseInt(document.getElementById('t1r3').value, 10);
+            var t1r4 = parseInt(document.getElementById('t1r4').value, 10);
+            var t1r5 = parseInt(document.getElementById('t1r5').value, 10);
+
+            switch (t1Joker) {
+                case 1:
+                    if (isNaN(t1r1))
+                        t1r1 = 0;
+                    t1r1 = t1r1 * 2;
+                    document.getElementById('t1r1').value = t1r1;
+                    break;
+                case 2:
+                    if (isNaN(t1r2))
+                        t1r1 = 0;
+                    t1r2 = t1r2 * 2;
+                    document.getElementById('t1r2').value = t1r2;
+                    break;
+                case 3:
+                    if (isNaN(t1r3))
+                        t1r3 = 0;
+                    t1r3 = t1r3 * 2;
+                    document.getElementById('t1r3').value = t1r3;
+                    break;
+                case 4:
+                    if (isNaN(t1r4))
+                        t1r4 = 0;
+                    t1r4 = t1r4 * 2;
+                    document.getElementById('t1r4').value = t1r4;
+                    break;
+                case 5:
+                    if (isNaN(t1r5))
+                        t1r5 = 0;
+                    t1r5 = t1r5 * 2;
+                    document.getElementById('t1r5').value = t1r5;
+                    break;
+                default:
+                    break;
+            }
+            var t1total = t1r1 + t1r2 + t1r3 + t1r4 + t1r5;
+            document.getElementById('t1tot').value = t1total;
+        } else if (value == 't2joker') {
+            var t2r1 = parseInt(document.getElementById('t2r1').value, 10);
+            var t2r2 = parseInt(document.getElementById('t2r2').value, 10);
+            var t2r3 = parseInt(document.getElementById('t2r3').value, 10);
+            var t2r4 = parseInt(document.getElementById('t2r4').value, 10);
+            var t2r5 = parseInt(document.getElementById('t2r5').value, 10);
+
+            switch (t2Joker) {
+                case 1:
+                    if (isNaN(t2r1))
+                        t2r1 = 0;
+                    t2r1 = t2r1 * 2;
+                    document.getElementById('t2r1').value = t2r1;
+                    break;
+                case 2:
+                    if (isNaN(t2r2))
+                        t2r1 = 0;
+                    t2r2 = t2r2 * 2;
+                    document.getElementById('t2r2').value = t2r2;
+                    break;
+                case 3:
+                    if (isNaN(t2r3))
+                        t2r3 = 0;
+                    t2r3 = t2r3 * 2;
+                    document.getElementById('t2r3').value = t2r3;
+                    break;
+                case 4:
+                    if (isNaN(t2r4))
+                        t2r4 = 0;
+                    t2r4 = t2r4 * 2;
+                    document.getElementById('t2r4').value = t2r4;
+                    break;
+                case 5:
+                    if (isNaN(t2r5))
+                        t2r5 = 0;
+                    t2r5 = t2r5 * 2;
+                    document.getElementById('t2r5').value = t2r5;
+                    break;
+                default:
+                    break;
+            }
+            var t2total = t2r1 + t2r2 + t2r3 + t2r4 + t2r5;
+            document.getElementById('t2tot').value = t2total;
+        } else if (value == 't3joker') {
+            var t3r1 = parseInt(document.getElementById('t3r1').value, 10);
+            var t3r2 = parseInt(document.getElementById('t3r2').value, 10);
+            var t3r3 = parseInt(document.getElementById('t3r3').value, 10);
+            var t3r4 = parseInt(document.getElementById('t3r4').value, 10);
+            var t3r5 = parseInt(document.getElementById('t3r5').value, 10);
+
+            switch (t3Joker) {
+                case 1:
+                    if (isNaN(t3r1))
+                        t3r1 = 0;
+                    t3r1 = t3r1 * 2;
+                    document.getElementById('t3r1').value = t3r1;
+                    break;
+                case 2:
+                    if (isNaN(t3r2))
+                        t3r1 = 0;
+                    t3r2 = t3r2 * 2;
+                    document.getElementById('t3r2').value = t3r2;
+                    break;
+                case 3:
+                    if (isNaN(t3r3))
+                        t3r3 = 0;
+                    t3r3 = t3r3 * 2;
+                    document.getElementById('t3r3').value = t3r3;
+                    break;
+                case 4:
+                    if (isNaN(t3r4))
+                        t3r4 = 0;
+                    t3r4 = t3r4 * 2;
+                    document.getElementById('t3r4').value = t3r4;
+                    break;
+                case 5:
+                    if (isNaN(t3r5))
+                        t3r5 = 0;
+                    t3r5 = t3r5 * 2;
+                    document.getElementById('t3r5').value = t3r5;
+                    break;
+                default:
+                    break;
+            }
+            var t3total = t3r1 + t3r2 + t3r3 + t3r4 + t3r5
+            document.getElementById('t3tot').value = t3total;
+        } else if (value == 't4joker') {
+            var t4r1 = parseInt(document.getElementById('t4r1').value, 10);
+            var t4r2 = parseInt(document.getElementById('t4r2').value, 10);
+            var t4r3 = parseInt(document.getElementById('t4r3').value, 10);
+            var t4r4 = parseInt(document.getElementById('t4r4').value, 10);
+            var t4r5 = parseInt(document.getElementById('t4r5').value, 10);
+
+            switch (t4Joker) {
+                case 1:
+                    if (isNaN(t4r1))
+                        t4r1 = 0;
+                    t4r1 = t4r1 * 2;
+                    document.getElementById('t4r1').value = t4r1;
+                    break;
+                case 2:
+                    if (isNaN(t4r2))
+                        t4r1 = 0;
+                    t4r2 = t4r2 * 2;
+                    document.getElementById('t4r2').value = t4r2;
+                    break;
+                case 3:
+                    if (isNaN(t4r3))
+                        t4r3 = 0;
+                    t4r3 = t4r3 * 2;
+                    document.getElementById('t4r3').value = t4r3;
+                    break;
+                case 4:
+                    if (isNaN(t4r4))
+                        t4r4 = 0;
+                    t4r4 = t4r4 * 2;
+                    document.getElementById('t4r4').value = t4r4;
+                    break;
+                case 5:
+                    if (isNaN(t4r5))
+                        t4r5 = 0;
+                    t4r5 = t4r5 * 2;
+                    document.getElementById('t4r5').value = t4r5;
+                    break;
+                default:
+                    break;
+            }
+            var t4total = t4r1 + t4r2 + t4r3 + t4r4 + t4r5;
+            document.getElementById('t4tot').value = t4total;
+        } else if (value == 't5joker') {
+            var t5r1 = parseInt(document.getElementById('t5r1').value, 10);
+            var t5r2 = parseInt(document.getElementById('t5r2').value, 10);
+            var t5r3 = parseInt(document.getElementById('t5r3').value, 10);
+            var t5r4 = parseInt(document.getElementById('t5r4').value, 10);
+            var t5r5 = parseInt(document.getElementById('t5r5').value, 10);
+
+            switch (t5Joker) {
+                case 1:
+                    if (isNaN(t5r1))
+                        t5r1 = 0;
+                    t5r1 = t5r1 * 2;
+                    document.getElementById('t5r1').value = t5r1;
+                    break;
+                case 2:
+                    if (isNaN(t5r2))
+                        t5r1 = 0;
+                    t5r2 = t5r2 * 2;
+                    document.getElementById('t5r2').value = t5r2;
+                    break;
+                case 3:
+                    if (isNaN(t5r3))
+                        t5r3 = 0;
+                    t5r3 = t5r3 * 2;
+                    document.getElementById('t5r3').value = t5r3;
+                    break;
+                case 4:
+                    if (isNaN(t5r4))
+                        t5r4 = 0;
+                    t5r4 = t5r4 * 2;
+                    document.getElementById('t5r4').value = t5r4;
+                    break;
+                case 5:
+                    if (isNaN(t5r5))
+                        t5r5 = 0;
+                    t5r5 = t5r5 * 2;
+                    document.getElementById('t5r5').value = t5r5;
+                    break;
+                default:
+                    break;
+            }
+            var t5total = t5r1 + t5r2 + t5r3 + t5r4 + t5r5
+            document.getElementById('t5tot').value = t5total;
+        }
+        calculateTotal();
+
+    }
+</script>
+
+<body>
+<div class="container float-left ml-3">
+    <div class="row mt-5">
+        <h1>Quiz Calculation Sheet of Quiz handle by <span th:text="${quiz.quizMasters}"></span></h1>
+    </div>
+    <div class="row mt-5">
+        <form method="post" action="#" th:action="@{/submitQuizSheet}" th:object="${quizSheet}">
+            <table class="table">
+                <tbody>
+                <tr>
+                    <td scope="col"><h2><span class="badge badge-primary">Points</span></h2></td>
+                    <td scope="col"><h2><span class="badge badge-secondary">Team Name</span></h2></td>
+                    <td scope="col"><h2><span class="badge badge-secondary">Round - I</span></h2></td>
+                    <td scope="col"><h2><span class="badge badge-secondary">Round - II</span></h2></td>
+                    <td scope="col"><h2><span class="badge badge-secondary">Round - III</span></h2></td>
+                    <td scope="col"><h2><span class="badge badge-secondary">Round - IV</span></h2></td>
+                    <td scope="col"><h2><span class="badge badge-secondary">Round - V</span></h2></td>
+                    <td scope="col"><h2><span class="badge badge-secondary">Joker Round</span></h2></td>
+                    <td scope="col"><h2><span class="badge badge-secondary">Total</span></h2></td>
+                    <td scope="col"><h2><span class="badge badge-secondary">Position</span></h2></td>
+                </tr>
+                <tr>
+                    <td scope="col"><h2><span class="badge badge-secondary">Team - I</span></h2></td>
+                    <td scope="col"><input id="t1n1" type="text" class="form-control" placeholder="Name"
+                                           name="team1Name"/></td>
+                    <td scope="col"><input id="t1r1" type="number" class="form-control" placeholder="Marks"
+                                           onkeyup="calculateTotal()" name="t1r1Score"/></td>
+                    <td scope="col"><input id="t1r2" type="number" class="form-control" placeholder="Marks"
+                                           onkeyup="calculateTotal()" name="t1r2Score"/></td>
+                    <td scope="col"><input id="t1r3" type="number" class="form-control" placeholder="Marks"
+                                           onkeyup="calculateTotal()" name="t1r3Score"/></td>
+                    <td scope="col"><input id="t1r4" type="number" class="form-control" placeholder="Marks"
+                                           onkeyup="calculateTotal()" name="t1r4Score"/></td>
+                    <td scope="col"><input id="t1r5" type="number" class="form-control" placeholder="Marks"
+                                           onkeyup="calculateTotal()" name="t1r5Score"/></td>
+                    <td scope="col">
+                        <select class="form-control" id="t1joker" onchange="addJoker('t1joker')">
+                            <option>Please select</option>
+                            <option value="1">Round - 1</option>
+                            <option value="2">Round - 2</option>
+                            <option value="3">Round - 3</option>
+                            <option value="4">Round - 4</option>
+                            <option value="5">Round - 5</option>
+                        </select></td>
+                    <td scope="col"><input id="t1tot" type="number" class="form-control" placeholder="Total"
+                                           name="t1Total" readonly/></td>
+                    <td scope="col"><input id="t1pos" type="number" class="form-control" placeholder="Position"
+                                           name="t1Position" readonly/>
+                    </td>
+                </tr>
+                <tr>
+                    <td scope="col"><h2><span class="badge badge-secondary">Team - II</span></h2></td>
+                    <td scope="col"><input id="t2n1" type="text" class="form-control" placeholder="Name"
+                                           name="team2Name"/></td>
+                    <td scope="col"><input id="t2r1" type="number" class="form-control" placeholder="Marks"
+                                           onkeyup="calculateTotal()" name="t2r1Score"/></td>
+                    <td scope="col"><input id="t2r2" type="number" class="form-control" placeholder="Marks"
+                                           onkeyup="calculateTotal()" name="t2r2Score"/></td>
+                    <td scope="col"><input id="t2r3" type="number" class="form-control" placeholder="Marks"
+                                           onkeyup="calculateTotal()" name="t2r3Score"/></td>
+                    <td scope="col"><input id="t2r4" type="number" class="form-control" placeholder="Marks"
+                                           onkeyup="calculateTotal()" name="t2r4Score"/></td>
+                    <td scope="col"><input id="t2r5" type="number" class="form-control" placeholder="Marks"
+                                           onkeyup="calculateTotal()" name="t2r5Score"/></td>
+                    <td scope="col">
+                        <select class="form-control input-group-lg" id="t2joker" onchange="addJoker('t2joker')">
+                            <option>Please select</option>
+                            <option value="1">Round - 1</option>
+                            <option value="2">Round - 2</option>
+                            <option value="3">Round - 3</option>
+                            <option value="4">Round - 4</option>
+                            <option value="5">Round - 5</option>
+                        </select></td>
+                    <td scope="col"><input id="t2tot" type="number" class="form-control" placeholder="Total"
+                                           name="t2Total" readonly></td>
+                    <td scope="col"><input id="t2pos" type="number" class="form-control" placeholder="Position"
+                                           name="t2Position" readonly>
+                    </td>
+                </tr>
+                <tr>
+                    <td scope="col"><h2><span class="badge badge-secondary">Team - III</span></h2></td>
+                    <td scope="col"><input id="t3n1" type="text" class="form-control" placeholder="Name"
+                                           name="team3Name"/></td>
+                    <td scope="col"><input id="t3r1" type="number" class="form-control" placeholder="Marks"
+                                           onkeyup="calculateTotal()" name="t3r1Score"/></td>
+                    <td scope="col"><input id="t3r2" type="number" class="form-control" placeholder="Marks"
+                                           onkeyup="calculateTotal()" name="t3r2Score"/></td>
+                    <td scope="col"><input id="t3r3" type="number" class="form-control" placeholder="Marks"
+                                           onkeyup="calculateTotal()" name="t3r3Score"/></td>
+                    <td scope="col"><input id="t3r4" type="number" class="form-control" placeholder="Marks"
+                                           onkeyup="calculateTotal()" name="t3r4Score"/></td>
+                    <td scope="col"><input id="t3r5" type="number" class="form-control" placeholder="Marks"
+                                           onkeyup="calculateTotal()" name="t3r5Score"/></td>
+                    <td scope="col">
+                        <select class="form-control" id="t3joker" onchange="addJoker('t3joker')">
+                            <option>Please select</option>
+                            <option value="1">Round - 1</option>
+                            <option value="2">Round - 2</option>
+                            <option value="3">Round - 3</option>
+                            <option value="4">Round - 4</option>
+                            <option value="5">Round - 5</option>
+                        </select>
+                    </td>
+                    <td scope="col"><input id="t3tot" type="number" class="form-control" placeholder="Total"
+                                           name="t3Total" readonly></td>
+                    <td scope="col"><input id="t3pos" type="number" class="form-control" placeholder="Position"
+                                           name="t3Position" readonly></td>
+                </tr>
+                <tr>
+                    <td scope="col"><h2><span class="badge badge-secondary">Team - IV</span></h2></td>
+                    <td scope="col"><input id="t4n1" type="text" class="form-control" placeholder="Name"
+                                           name="team4Name"/></td>
+                    <td scope="col"><input id="t4r1" type="number" class="form-control" placeholder="Marks"
+                                           onkeyup="calculateTotal()" name="t4r1Score"/></td>
+                    <td scope="col"><input id="t4r2" type="number" class="form-control" placeholder="Marks"
+                                           onkeyup="calculateTotal()" name="t4r2Score"/></td>
+                    <td scope="col"><input id="t4r3" type="number" class="form-control" placeholder="Marks"
+                                           onkeyup="calculateTotal()" name="t4r3Score"/></td>
+                    <td scope="col"><input id="t4r4" type="number" class="form-control" placeholder="Marks"
+                                           onkeyup="calculateTotal()" name="t4r4Score"/></td>
+                    <td scope="col"><input id="t4r5" type="number" class="form-control" placeholder="Marks"
+                                           onkeyup="calculateTotal()" name="t4r5Score"/></td>
+                    <td scope="col">
+                        <select class="form-control" id="t4joker" onchange="addJoker('t4joker')">
+                            <option>Please select</option>
+                            <option value="1">Round - 1</option>
+                            <option value="2">Round - 2</option>
+                            <option value="3">Round - 3</option>
+                            <option value="4">Round - 4</option>
+                            <option value="5">Round - 5</option>
+                        </select>
+                    </td>
+                    <td scope="col"><input id="t4tot" type="number" class="form-control" placeholder="Total"
+                                           name="t4Total" readonly></td>
+                    <td scope="col"><input id="t4pos" type="number" class="form-control" placeholder="Position"
+                                           name="t4Position" readonly></td>
+                </tr>
+                <tr>
+                    <td scope="col"><h2><span class="badge badge-secondary">Team - V</span></h2></td>
+                    <td scope="col"><input id="t5n1" type="text" class="form-control" placeholder="Name"
+                                           name="team5Name"/></td>
+                    <td scope="col"><input id="t5r1" type="number" class="form-control" placeholder="Marks"
+                                           onkeyup="calculateTotal()" name="t5r1Score"/></td>
+                    <td scope="col"><input id="t5r2" type="number" class="form-control" placeholder="Marks"
+                                           onkeyup="calculateTotal()" name="t5r2Score"/></td>
+                    <td scope="col"><input id="t5r3" type="number" class="form-control" placeholder="Marks"
+                                           onkeyup="calculateTotal()" name="t5r3Score"/></td>
+                    <td scope="col"><input id="t5r4" type="number" class="form-control" placeholder="Marks"
+                                           onkeyup="calculateTotal()" name="t5r4Score"/></td>
+                    <td scope="col"><input id="t5r5" type="number" class="form-control" placeholder="Marks"
+                                           onkeyup="calculateTotal()" name="t5r5Score"/></td>
+                    <td scope="col">
+                        <select class="form-control" id="t5joker" onchange="addJoker('t5joker')">
+                            <option>Please select</option>
+                            <option value="1">Round - 1</option>
+                            <option value="2">Round - 2</option>
+                            <option value="3">Round - 3</option>
+                            <option value="4">Round - 4</option>
+                            <option value="5">Round - 5</option>
+                        </select>
+                    </td>
+                    <td scope="col"><input id="t5tot" type="number" class="form-control" placeholder="Total"
+                                           name="t5Total" readonly></td>
+                    <td scope="col"><input id="t5pos" type="number" class="form-control" placeholder="Position"
+                                           name="t5Position" readonly></td>
+                </tr>
+                </tbody>
+            </table>
+            <input type="hidden" name="quizId" th:value="${quiz.id}"/>
+            <button type="submit" class="btn btn-primary btn-block">Submit</button>
+
+        </form>
+    </div>
+</div>
+</body>
+</html>
