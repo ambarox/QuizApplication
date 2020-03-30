@@ -8,4 +8,7 @@ import java.util.Optional;
 
 public interface QuizRepository extends CrudRepository<Quiz, Long> {
     Optional<Quiz> findById(Long id);
+
+    @Override
+    void deleteById(Long aLong);
 }

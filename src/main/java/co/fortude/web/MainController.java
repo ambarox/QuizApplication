@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.view.RedirectView;
 
 @Controller
 public class MainController {
@@ -35,5 +36,11 @@ public class MainController {
         Iterable<Scores> scores = scoreRepository.findAllByQuiz_Id(quizId);
         model.addAttribute("scores", scores);
         return "viewResults";
+    }
+
+    @RequestMapping("/deleteResults/{quizId}")
+    public RedirectView deleteResults(@PathVariable("quizId") Long quizId,  Model model) {
+        quizRepository.deleteById(quizId);
+        return new RedirectView("/");
     }
 }

@@ -28,6 +28,7 @@
                 <td scope="row" th:text="${quiz.quizMasters}" />
                 <td scope="row" th:text="${quiz.quizDate}" />
                 <td><a th:href="@{/viewResults/{quizId}(quizId = ${quiz.id})}">View Results</a></td>
+                <td><a th:href="@{/deleteResults/{quizId}(quizId = ${quiz.id})}">Delete</a></td>
             </tr>
             </tbody>
         </table>
